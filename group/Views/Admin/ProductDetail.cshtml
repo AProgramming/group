@@ -1,0 +1,68 @@
+﻿@model IEnumerable<group.Models.Product>
+
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+
+<table class="table">
+    <tr>
+        <th >
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th class="hidden-xs hidden-sm">
+            @Html.DisplayNameFor(model => model.ProductDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>
+        <th class="hidden-xs hidden-sm">
+            @Html.DisplayNameFor(model => model.Customer)
+        </th>
+        <th class="hidden-xs hidden-sm">
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th class="hidden-xs hidden-sm">
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th class="hidden-xs hidden-sm">
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    using (Html.BeginForm("DeleteProduct", "Admin", new { id = item.Id }))
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td class="hidden-xs hidden-sm">
+            @Html.DisplayFor(modelItem => item.ProductDesc)
+        </td>
+        <td>
+            @Url.Content(item.ProductImage)
+        </td>
+        <td class="hidden-xs hidden-sm">
+            @Html.DisplayFor(modelItem => item.Customer)
+        </td>
+        <td class="hidden-xs hidden-sm">
+            @Url.Content(item.Image)
+        </td>
+        <td class="hidden-xs hidden-sm">
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td class="hidden-xs hidden-sm">
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+            <input class="btn btn-danger" type="submit" value="حذف" onclick="return confirm('از حذف @item.Id مطمئن هستید؟')" />
+        </td>
+    </tr>
+    }
+}
+
+</table>

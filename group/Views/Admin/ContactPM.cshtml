@@ -1,0 +1,53 @@
+﻿@model IEnumerable<group.Models.ContactUs>
+
+@{
+    ViewBag.Title = "ContactPM";
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PM)
+        </th>
+              <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    using (Html.BeginForm("DeleteContactPM", "Admin", new { id = item.Id }))
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PM)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("نمایش", "show", new { id = item.Id }) |
+            <input class="btn btn-danger" type="submit" value="حذف" onclick="return confirm('از حذف @item.Subject مطمئن هستید؟')" />
+        </td>
+    </tr>
+    }
+}
+
+</table>
